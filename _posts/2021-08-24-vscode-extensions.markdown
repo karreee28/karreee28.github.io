@@ -3,6 +3,7 @@ layout: post
 title:  "vscode 유용한 확장프로그램"
 date:   2021-08-24 17:38:20 +0900
 categories: data
+tags: [data, vscode]
 ---
 웹퍼블리싱, 웹프론트엔드개발에 유용한 확장프로그램 리스트
 
