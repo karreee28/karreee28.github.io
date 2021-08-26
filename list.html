@@ -4,11 +4,12 @@ title: All Posts
 <div class="container">
   <div id="article">
   <h1>Archive</h1>
-  <div class="tags">
+  <!-- 편리성을 위해 태그기능 구현 필요 -->
+  <!-- <div class="tags">
     {% for tag in site.data.tags %}
       <span class="tag" data-tag="{{tag}}">{{ tag }}</span>
     {% endfor %}
-  </div>
+  </div> -->
   <ul class="posts">
     {% for post in site.posts %}
     <li>

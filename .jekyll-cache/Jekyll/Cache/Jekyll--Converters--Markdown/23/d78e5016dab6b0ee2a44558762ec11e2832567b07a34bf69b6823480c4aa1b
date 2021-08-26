@@ -1,0 +1,271 @@
+I"_r<h3 id="v-for-기초리스트">v-for 기초(리스트)</h3>
+
+<h5 id="레이아웃">//레이아웃</h5>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in items"</span> <span class="na">:key=</span><span class="s">"item.user_id"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+<p>여기서 ‘item’은 무슨 이름이어도 상관 없음(‘items’ 배열의 항목 이름을 정의) <br />
+key는 각 item의 데이터 중 고유한 값을 가져와야함.</p>
+
+<h5 id="데이터">//데이터</h5>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">items</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">user_id</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="na">user_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Dickerson</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">tel1</span><span class="p">:</span> <span class="dl">'</span><span class="s1">010-000-0030</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">user_id</span><span class="p">:</span> <span class="mi">41</span><span class="p">,</span>
+    <span class="na">user_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">tel1</span><span class="p">:</span> <span class="dl">'</span><span class="s1">010-000-0030</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="v-for-활용ex-멤버-추가수정">v-for 활용(ex. 멤버 추가/수정)</h3>
+
+<h5 id="레이아웃수정">//레이아웃(수정)</h5>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 수정일 경우 예시 레이아웃 --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"edit"</span> <span class="na">v-for=</span><span class="s">"pet in pets"</span> <span class="na">:key=</span><span class="s">"pet.pet_id"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- 배열을 for문으로 돌림 --&gt;</span>
+  <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"postPet"</span><span class="nt">&gt;</span>저장<span class="nt">&lt;/el-button&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>구분<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-radio-group</span> <span class="na">v-model=</span><span class="s">"pet.type"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"강아지"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"고양이"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+        <span class="nt">&lt;/el-radio-group&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>이름<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.pet_name"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col pet-age"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>나이<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.age_y"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+        <span class="nt">&lt;span&gt;</span>년<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.age_m"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+        <span class="nt">&lt;span&gt;</span>개월<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>품종<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">placeholder=</span><span class="s">"Please input"</span> <span class="na">v-model=</span><span class="s">"pet.kind_name"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;template</span> <span class="na">slot=</span><span class="s">"append"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;el-button</span> <span class="err">@</span><span class="na">click=</span><span class="s">"modalOpen(pet, index)"</span><span class="nt">&gt;</span>선택하기<span class="nt">&lt;/el-button&gt;</span>
+          <span class="nt">&lt;/template&gt;</span>
+        <span class="nt">&lt;/el-input&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>성별<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-radio-group</span> <span class="na">v-model=</span><span class="s">"pet.sex"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"남"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"여"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+        <span class="nt">&lt;/el-radio-group&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>몸무게<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.weight"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>중성화<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-switch</span>
+          <span class="na">v-model=</span><span class="s">"pet.de_sexing"</span>
+          <span class="na">active-text=</span><span class="s">"중성"</span>
+          <span class="na">inactive-text=</span><span class="s">"중성 아님"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/el-switch&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>메모<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;el-input</span> <span class="na">type=</span><span class="s">"textarea"</span> <span class="na">v-model=</span><span class="s">"pet.memo"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<h5 id="레이아웃추가">//레이아웃(추가)</h5>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--추가일 경우 예시 레이아웃--&gt;</span>  
+<span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"addPet"</span><span class="nt">&gt;</span>반려동물추가<span class="nt">&lt;/el-button&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"add"</span> <span class="na">v-for=</span><span class="s">"(pet, index) in newPets"</span> <span class="na">:key=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- 배열을 for문으로 돌림 / 각 pet에 index를 부여 --&gt;</span>
+  <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"putPet(pet)"</span><span class="nt">&gt;</span>저장<span class="nt">&lt;/el-button&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>구분<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-radio-group</span> <span class="na">v-model=</span><span class="s">"pet.type"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"강아지"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"고양이"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+        <span class="nt">&lt;/el-radio-group&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>이름<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.pet_name"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col pet-age"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>나이<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.age_y"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+        <span class="nt">&lt;span&gt;</span>년<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.age_m"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+        <span class="nt">&lt;span&gt;</span>개월<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>품종<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">placeholder=</span><span class="s">"Please input"</span> <span class="na">v-model=</span><span class="s">"pet.kind_name"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;template</span> <span class="na">slot=</span><span class="s">"append"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;el-button</span> <span class="err">@</span><span class="na">click=</span><span class="s">"modalOpen(pet, index)"</span><span class="nt">&gt;</span>선택하기<span class="nt">&lt;/el-button&gt;</span>
+          <span class="nt">&lt;/template&gt;</span>
+        <span class="nt">&lt;/el-input&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>성별<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-radio-group</span> <span class="na">v-model=</span><span class="s">"pet.sex"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"남"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+          <span class="nt">&lt;el-radio-button</span> <span class="na">label=</span><span class="s">"여"</span><span class="nt">&gt;&lt;/el-radio-button&gt;</span>
+        <span class="nt">&lt;/el-radio-group&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>몸무게<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">v-model=</span><span class="s">"pet.weight"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"12"</span> <span class="na">:xs=</span><span class="s">"24"</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>중성화<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-switch</span>
+          <span class="na">v-model=</span><span class="s">"pet.de_sexing"</span>
+          <span class="na">active-text=</span><span class="s">"중성"</span>
+          <span class="na">inactive-text=</span><span class="s">"중성 아님"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/el-switch&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+  <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;el-col</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>메모<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-cont"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">type=</span><span class="s">"textarea"</span> <span class="na">v-model=</span><span class="s">"pet.memo"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/el-input&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-col&gt;</span>
+  <span class="nt">&lt;/el-row&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+<p>저장버튼(postPet)을 누르면 입력 되어있는 데이터를 API로 저장 <br />
+추가버튼(addPet)을 누르면 새로운 폼을 for문을 통해 생성</p>
+
+<h5 id="데이터-1">//데이터</h5>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">pets</span><span class="p">:</span> <span class="p">[],</span> 
+    <span class="na">newPets</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">}</span>
+<span class="p">},</span>
+</code></pre></div></div>
+<p>빈 배열을 데이터에 정의(method에서 넣어줌)</p>
+
+<h5 id="함수">//함수</h5>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">methods</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">postPet</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// API로 데이터 post (보통 기존 데이터 수정 시 사용)</span>
+  <span class="p">},</span>
+  <span class="nx">putPet</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// API로 데이터 put (데이터 추가 시 사용)</span>
+  <span class="p">},</span>
+  <span class="nx">getList</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 보통 API로 데이터를 불러옴. 아래 배열은 임시 데이터. </span>
+    <span class="c1">// 데이터 수정일 경우 사용</span>
+    <span class="kd">let</span> <span class="nx">rs</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">pet_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">강아지</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">pet_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">삼월이</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">age_y</span><span class="p">:</span> <span class="dl">'</span><span class="s1">6</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">age_m</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">kind_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">포메라니안</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">sex</span><span class="p">:</span> <span class="dl">'</span><span class="s1">남</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">weight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3.5kg</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">de_sexing</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">memo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">건조한 음성에 화를 내는 편</span><span class="dl">'</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">pet_id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">고양이</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">pet_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">사월이</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">age_y</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">age_m</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">kind_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">메인쿤</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">sex</span><span class="p">:</span> <span class="dl">'</span><span class="s1">남</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">weight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">16.2kg</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">de_sexing</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">memo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">천천히 상냥히 정리하면 얌전하다</span><span class="dl">'</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pets</span> <span class="o">=</span> <span class="nx">rs</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">addPet</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// API로 데이터 푸시</span>
+    <span class="c1">// 데이터 추가 일 경우 사용</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">newPets</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+      <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">강아지</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">pet_name</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">age_y</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">age_m</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">kind_name</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">sex</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">weight</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">de_sexing</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">memo</span><span class="p">:</span> <span class="dl">''</span>
+      <span class="p">}</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<p>for문을 돌릴 배열과 API로드 시 필요한 함수를 methods에 정의</p>
+:ET
