@@ -9,7 +9,8 @@ tags: [data, vscode]
 
 
 `Extentions List: `
-{% highlight ruby %}
+
+```
 
 Beautify
 Bracket Pair Colorizer
@@ -26,6 +27,6 @@ code runner
 css peek
 html css support
 
-{% endhighlight %}
+```
 
 계속 업데이트 예정
