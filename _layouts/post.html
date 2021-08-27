@@ -12,7 +12,8 @@ layout: default
     <div class="tags">
       {% for tag in page.tags %}
         {% if site.data.tags contains tag %}
-          <span class="tag">{{ tag }}</span>
+          <!-- bootstrap 적용해보기 -->
+          <span class="tag badge rounded-pill bg-primary">{{ tag }}</span> 
         {% endif %}
       {% endfor %}
     </div>
