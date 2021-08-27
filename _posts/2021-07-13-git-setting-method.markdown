@@ -32,7 +32,7 @@ $ npm run dev
 5. $ git add .
 6. $ git commit -m "커밋할 내용"
 7. $ git remote add origin [repository 주소(주소 뒤에 .git이 붙음)]
-8. $ git remote -v (로컬 저장소를 원격 저장소로 연결)
+8. $ git remote -v (repository 연결 확인)
 9. $ git push origin master
 
 //github 정책으로 인해 master브랜치 이름이 main으로 바뀌어서 이 후에 master브랜치를 main으로 바꾸는 작업 필요
@@ -51,7 +51,7 @@ $ npm run dev
 
 `Git Pull`
 {% highlight ruby %}
-1. $ cd hup-admin
+1. $ cd '로컬 디렉토리'
 2. $ git pull
 3. 에러 시 $ git stash 후 $ git pull //내가 수정한 부분을 다른 곳에 임시 저장
 4. $ npm install
