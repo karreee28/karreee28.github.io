@@ -283,6 +283,196 @@ for문을 돌릴 배열과 API로드 시 필요한 함수를 methods에 정의
 
 ### 이중for문 예시(for문 안에 for문)
 - 구조 <br>
-  큰 리스트를 for문으로 돌리고, 각각이 가진 리스트를 for문으로 또 돌림. 
-  큰 리스트 클릭 시, 각각의 리스트가 펼쳐짐 (그래서 각 데이터 배열에 isOpen이라는 boolean값을 둠)
-  각각의 리스트에는 리스트에 추가할 수 있는 항목이 있음(이건 for문 안돌림 - 방식은 동일)dd
+  큰 리스트를 for문으로 돌리고, 각각이 가진 리스트를 for문으로 또 돌림. <br>
+  큰 리스트 클릭 시, 각각의 리스트가 펼쳐짐 (그래서 각 데이터 배열에 isOpen이라는 boolean값을 둠) <br>
+  각각의 리스트에는 리스트에 추가할 수 있는 항목이 있음(이건 for문 안돌림 - 방식은 동일)
+
+##### //레이아웃
+```html
+<ul class="option-list">
+  <!-- items 데이터 배열의 item 이라는 이름으로 항목들을 정의 -->
+  <li class="option-item" v-for="w_item in items" :key="w_item.id"> 
+    <!-- 해당 레이어 클릭 시 option-detail이 펼쳐짐(v-if 달아둠) -->
+    <div class="option-btn clear" @click="w_item.isOpen = !w_item.isOpen">
+      <p class="txt">{{ w_item.txt }}</p>
+      <div class="ico">
+        <i class="el-icon-arrow-down" v-if="!w_item.isOpen"></i> 
+        <i class="el-icon-arrow-up" v-else></i>
+      </div>
+    </div>
+    <el-collapse-transition>
+      <div class="option-detail" v-if="w_item.isOpen">
+        <div class="inner">
+          <!-- 2중for문. items 데이터 배열에서 item 으로 정의한 항목 중, list라는 배열에서 item 이라는 이름으로 항목을 정의 -->
+          <el-row class="option-detail-item" v-for="item in w_item.list" :key="item.id">
+            <div class="btn-wrap">
+              <el-button size="mini" @click="addItemNew(item)">추가</el-button>
+            </div>
+            <el-col :span="10" class="txt">
+              {{ item.txt }}
+            </el-col>
+            <el-col :span="6" class="switch">
+              <el-switch
+                v-model="item.onOff"
+                active-text="옵션 사용">
+              </el-switch>
+            </el-col>
+            <el-col :span="8" class="price-input">
+              <span>기본 가격</span>
+              <el-input
+                size="mini"
+                placeholder="Please Input"
+                v-model="item.price">
+              </el-input>
+              <span>원</span>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+    </el-collapse-transition>
+  </li>
+</ul>
+```
+
+##### //데이터
+```javascript
+data() {
+  return {
+    openDetail: false,
+    openIndex: 0,
+    items: []
+  }
+},
+```
+
+##### //함수
+```javascript
+mounted: async function(){
+    this.getList();
+  },
+  methods: {
+    getList: async function(){
+      //items 배열 안에 list라는 배열을 넣어 2중for문 완성
+      this.items = [
+        {
+          id: 1,
+          txt: '털길이 옵션',
+          isOpen: false,
+          list: [
+            {
+              id: 1,
+              txt: '3mm',
+              onOff: true,
+              price: '5,000'
+            },
+            {
+              id: 2,
+              txt: '5mm',
+              onOff: true,
+              price: '5,000'
+            }
+          ]
+        },
+        {
+          id: 2,
+          txt: '얼굴스타일 옵션',
+          isOpen: false,
+          list: [
+            {
+              id: 1,
+              txt: '전체컷',
+              onOff: true,
+              price: '5,000'
+            },
+            {
+              id: 2,
+              txt: '알머리',
+              onOff: true,
+              price: '5,000'
+            },
+            {
+              id: 3,
+              txt: '크라운',
+              onOff: true,
+              price: '5,000'
+            },
+            {
+              id: 4,
+              txt: '무스타슈',
+              onOff: true,
+              price: '5,000'
+            }
+          ]
+        }
+      ]
+    },
+    //push로 새로운 아이템을 넣으려면
+    addItemNew: function(item){
+      item.list.push(
+        {
+          txt: '',
+          onOff: true,
+          price: ''      
+        }
+      )
+    }
+  }
+}
+```
+
+
+- 추가 및 삭제 되어야 하는 데이터가 배열안의 배열 일 경우, 위의 방법처럼 item을 불러와 넣는 것 보다는 
+
+
+##### //레이아웃
+```html
+<el-col :span="8" class="weight-category" v-for="(w_item, index) in weight_obj" :key="w_item.breed_id">
+  <div class="category-title">{{ w_item.breed_name }}</div>
+    <div class="weight-list">
+    <ul>
+      <li v-for="(item, index) in w_item.list" :key="item.id">
+        <el-input size="mini" v-model="item.val" class="weight-input"></el-input>
+        <el-button size="mini" @click="removeWeightList(w_item.list, index)"  icon="el-icon-delete" class="delete-btn"></el-button>
+      </li>
+    </ul>
+    <div class="btn-wrap">
+      <el-button size="mini" @click="addWeightList(w_item.list)">추가</el-button>
+    </div>
+  </div>
+</el-col>
+```
+
+이러한 구조에서 @click="removeWeightList(w_item.list)"로 값을 던지고, (괄호 안에 있는 것을 던져준다) <br>
+하단 메소드에서
+
+##### //함수
+```javascript
+addWeightList: function(array) {
+  array.push(
+    {
+      id: ++this.weight_dummy_id,
+      val: '',
+      standard: 2,
+      is_add: true,
+      val_option: [
+        {
+          value: 1,
+          label: '미만'
+        },
+        {
+          value: 2,
+          label: '이상'
+        }
+      ]
+    }
+  )
+},
+removeWeightList: function(array, index) {
+  array.splice(index, 1)
+}
+```
+위에서 w_item.list라는 배열을 던졌으니까 array로 받아서 넣어준다. <br>
+addWeightList 함수에서 push로 배열을 추가하고, <br>
+removeWeightList 함수처럼 splice로 삭제도 가능하다. <br>
+<br>
+splice의 경우에는 몇 번째 배열인 지 알아야 하기 때문에 index도 같이 받아와 넣어줬다.
