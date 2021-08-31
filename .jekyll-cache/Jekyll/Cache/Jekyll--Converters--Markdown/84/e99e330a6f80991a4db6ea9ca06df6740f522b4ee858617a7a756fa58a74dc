@@ -1,0 +1,25 @@
+I"�<h5 id="aws에-git-업로드-방법">AWS에 git 업로드 방법</h5>
+
+<ol>
+  <li>EC2(ubuntu)에 pm2 설치 <br />
+  *pm2 는 프로세스 관리도구 (engineX, tomcat 등이 있음)</li>
+  <li>pm2로 git 설치 후에 업로드하면</li>
+  <li>ecosystem.config.js라는 환경파일이 생기고</li>
+  <li>npm run build 명령어로 빌드하면</li>
+  <li>서버에 업로드 됨.</li>
+</ol>
+
+<p>※ 추가로 필요한 작업이 있을 수 있음</p>
+
+<p><code class="language-plaintext highlighter-rouge">* ecosystem.config.js 샘플</code></p>
+<pre><code class="language-script">module.exports = {
+  script: "serve",
+  env: {
+  PM2_SERVE_PATH: '.',
+  PM2_SERVE_PORT: 9090,
+  PM2_SERVE_SPA: 'true',
+  PM2_SERVE_HOMEPAGE: '/index.html'
+  }
+};
+</code></pre>
+:ET

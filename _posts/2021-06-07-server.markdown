@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "서버 관련"
+date:   2021-06-07 00:00:00 +0900
+categories: study
+tags: [study, vuejs, javascript]
+---
+
+##### AWS에 git 업로드 방법
+
+1. EC2(ubuntu)에 pm2 설치 <br>
+  *pm2 는 프로세스 관리도구 (engineX, tomcat 등이 있음)
+2. pm2로 git 설치 후에 업로드하면 
+3. ecosystem.config.js라는 환경파일이 생기고
+4. npm run build 명령어로 빌드하면 
+5. 서버에 업로드 됨.
+
+※ 추가로 필요한 작업이 있을 수 있음
+
+`* ecosystem.config.js 샘플`
+```script
+module.exports = {
+  script: "serve",
+  env: {
+  PM2_SERVE_PATH: '.',
+  PM2_SERVE_PORT: 9090,
+  PM2_SERVE_SPA: 'true',
+  PM2_SERVE_HOMEPAGE: '/index.html'
+  }
+};
+```

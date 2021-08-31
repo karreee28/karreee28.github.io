@@ -1,0 +1,10 @@
+I"�<h3 id="if문-기초">if문 기초</h3>
+
+<p>삼항조건연산자(축약형)</p>
+<h5 id="레이아웃">//레이아웃</h5>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;el-button</span> <span class="na">:type=</span><span class="s">"isShop ? 'primary' : ''"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"isShop = true;"</span><span class="nt">&gt;</span>점주 (사업자로 가입)<span class="nt">&lt;/el-button&gt;</span>
+<span class="nt">&lt;el-button</span> <span class="na">:type=</span><span class="s">"isShop ? '':'primary'"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"isShop = false;"</span><span class="nt">&gt;</span>직원 (직원으로 가입)<span class="nt">&lt;/el-button&gt;</span>
+</code></pre></div></div>
+<p>vue.js의 Element-ui 에서는 :type 처럼 속성 앞에 : 를 붙여 함수로 핸들링 가능
+조건 ? ‘true 일 때’ : ‘false 일 때’</p>
+:ET

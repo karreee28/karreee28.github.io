@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "if문 관련"
+date:   2021-06-04 00:00:00 +0900
+categories: study
+tags: [study, vuejs, javascript]
+---
+### if문 기초
+
+삼항조건연산자(축약형)
+##### //레이아웃
+```html
+<el-button :type="isShop ? 'primary' : ''" @click="isShop = true;">점주 (사업자로 가입)</el-button>
+<el-button :type="isShop ? '':'primary'" @click="isShop = false;">직원 (직원으로 가입)</el-button>
+```
+vue.js의 Element-ui 에서는 :type 처럼 속성 앞에 : 를 붙여 함수로 핸들링 가능
+조건 ? 'true 일 때' : 'false 일 때'

@@ -1,10 +1,10 @@
-I"yr<h3 id="v-for-기초리스트">v-for 기초(리스트)</h3>
+I"K�<h3 id="v-for-기초리스트">v-for 기초(리스트)</h3>
 
 <h5 id="레이아웃">//레이아웃</h5>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
   <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in items"</span> <span class="na">:key=</span><span class="s">"item.user_id"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;p&gt;</span>``<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span> item.user_name <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span> item.tel1 <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ul&gt;</span>
 </code></pre></div></div>
@@ -32,7 +32,7 @@ key는 각 item의 데이터 중 고유한 값을 가져와야함.</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 수정일 경우 예시 레이아웃 --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"edit"</span> <span class="na">v-for=</span><span class="s">"pet in pets"</span> <span class="na">:key=</span><span class="s">"pet.pet_id"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- 배열을 for문으로 돌림 --&gt;</span>
-  <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"postPet"</span><span class="nt">&gt;</span>저장<span class="nt">&lt;/el-button&gt;</span>
+  <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"putPet"</span><span class="nt">&gt;</span>저장<span class="nt">&lt;/el-button&gt;</span>
   <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;el-col</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>구분<span class="nt">&lt;/div&gt;</span>
@@ -115,7 +115,7 @@ key는 각 item의 데이터 중 고유한 값을 가져와야함.</p>
 <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"addPet"</span><span class="nt">&gt;</span>반려동물추가<span class="nt">&lt;/el-button&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"add"</span> <span class="na">v-for=</span><span class="s">"(pet, index) in newPets"</span> <span class="na">:key=</span><span class="s">"index"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- 배열을 for문으로 돌림 / 각 pet에 index를 부여 --&gt;</span>
-  <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"putPet(pet)"</span><span class="nt">&gt;</span>저장<span class="nt">&lt;/el-button&gt;</span>
+  <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"small"</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"postPet(pet)"</span><span class="nt">&gt;</span>저장<span class="nt">&lt;/el-button&gt;</span>
   <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"form-row"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;el-col</span> <span class="na">class=</span><span class="s">"form-col"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>구분<span class="nt">&lt;/div&gt;</span>
@@ -194,7 +194,7 @@ key는 각 item의 데이터 중 고유한 값을 가져와야함.</p>
   <span class="nt">&lt;/el-row&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </code></pre></div></div>
-<p>저장버튼(postPet)을 누르면 입력 되어있는 데이터를 API로 저장 <br />
+<p>저장버튼(putPet)을 누르면 입력 되어있는 데이터를 API로 저장 <br />
 추가버튼(addPet)을 누르면 새로운 폼을 for문을 통해 생성</p>
 
 <h5 id="데이터-1">//데이터</h5>
@@ -210,15 +210,14 @@ key는 각 item의 데이터 중 고유한 값을 가져와야함.</p>
 <h5 id="함수">//함수</h5>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">methods</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">postPet</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// API로 데이터 post (보통 기존 데이터 수정 시 사용)</span>
+  <span class="nl">putPet</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// API로 데이터 put (보통 기존 데이터 수정 시 사용)</span>
   <span class="p">},</span>
-  <span class="nx">putPet</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// API로 데이터 put (데이터 추가 시 사용)</span>
+  <span class="nx">postPet</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// API로 데이터 post (데이터 추가 시 사용)</span>
   <span class="p">},</span>
   <span class="nx">getList</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// 보통 API로 데이터를 불러옴. 아래 배열은 임시 데이터. </span>
-    <span class="c1">// 데이터 수정일 경우 사용</span>
+    <span class="c1">// API로 데이터 get. 아래 배열은 임시 데이터. </span>
     <span class="kd">let</span> <span class="nx">rs</span> <span class="o">=</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="na">pet_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -248,7 +247,6 @@ key는 각 item의 데이터 중 고유한 값을 가져와야함.</p>
     <span class="k">this</span><span class="p">.</span><span class="nx">pets</span> <span class="o">=</span> <span class="nx">rs</span><span class="p">;</span>
   <span class="p">},</span>
   <span class="nx">addPet</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// API로 데이터 푸시</span>
     <span class="c1">// 데이터 추가 일 경우 사용</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">newPets</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
       <span class="p">{</span>
@@ -268,4 +266,197 @@ key는 각 item의 데이터 중 고유한 값을 가져와야함.</p>
 
 </code></pre></div></div>
 <p>for문을 돌릴 배열과 API로드 시 필요한 함수를 methods에 정의</p>
+
+<h3 id="이중for문-예시for문-안에-for문">이중for문 예시(for문 안에 for문)</h3>
+<ul>
+  <li>구조 <br />
+큰 리스트를 for문으로 돌리고, 각각이 가진 리스트를 for문으로 또 돌림. <br />
+큰 리스트 클릭 시, 각각의 리스트가 펼쳐짐 (그래서 각 데이터 배열에 isOpen이라는 boolean값을 둠) <br />
+각각의 리스트에는 리스트에 추가할 수 있는 항목이 있음(이건 for문 안돌림 - 방식은 동일)</li>
+</ul>
+
+<h5 id="레이아웃-1">//레이아웃</h5>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"option-list"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- items 데이터 배열의 item 이라는 이름으로 항목들을 정의 --&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"option-item"</span> <span class="na">v-for=</span><span class="s">"w_item in items"</span> <span class="na">:key=</span><span class="s">"w_item.id"</span><span class="nt">&gt;</span> 
+    <span class="c">&lt;!-- 해당 레이어 클릭 시 option-detail이 펼쳐짐(v-if 달아둠) --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"option-btn clear"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"w_item.isOpen = !w_item.isOpen"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"txt"</span><span class="nt">&gt;&lt;/p&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ico"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"el-icon-arrow-down"</span> <span class="na">v-if=</span><span class="s">"!w_item.isOpen"</span><span class="nt">&gt;&lt;/i&gt;</span> 
+        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"el-icon-arrow-up"</span> <span class="na">v-else</span><span class="nt">&gt;&lt;/i&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;el-collapse-transition&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"option-detail"</span> <span class="na">v-if=</span><span class="s">"w_item.isOpen"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner"</span><span class="nt">&gt;</span>
+          <span class="c">&lt;!-- 2중for문. items 데이터 배열에서 item 으로 정의한 항목 중, list라는 배열에서 item 이라는 이름으로 항목을 정의 --&gt;</span>
+          <span class="nt">&lt;el-row</span> <span class="na">class=</span><span class="s">"option-detail-item"</span> <span class="na">v-for=</span><span class="s">"item in w_item.list"</span> <span class="na">:key=</span><span class="s">"item.id"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-wrap"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"mini"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"addItemNew(item)"</span><span class="nt">&gt;</span>추가<span class="nt">&lt;/el-button&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"10"</span> <span class="na">class=</span><span class="s">"txt"</span><span class="nt">&gt;</span>
+              
+            <span class="nt">&lt;/el-col&gt;</span>
+            <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"6"</span> <span class="na">class=</span><span class="s">"switch"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;el-switch</span>
+                <span class="na">v-model=</span><span class="s">"item.onOff"</span>
+                <span class="na">active-text=</span><span class="s">"옵션 사용"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;/el-switch&gt;</span>
+            <span class="nt">&lt;/el-col&gt;</span>
+            <span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"8"</span> <span class="na">class=</span><span class="s">"price-input"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;span&gt;</span>기본 가격<span class="nt">&lt;/span&gt;</span>
+              <span class="nt">&lt;el-input</span>
+                <span class="na">size=</span><span class="s">"mini"</span>
+                <span class="na">placeholder=</span><span class="s">"Please Input"</span>
+                <span class="na">v-model=</span><span class="s">"item.price"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;/el-input&gt;</span>
+              <span class="nt">&lt;span&gt;</span>원<span class="nt">&lt;/span&gt;</span>
+            <span class="nt">&lt;/el-col&gt;</span>
+          <span class="nt">&lt;/el-row&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/el-collapse-transition&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<h5 id="데이터-2">//데이터</h5>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">openDetail</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">openIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">items</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">}</span>
+<span class="p">},</span>
+</code></pre></div></div>
+
+<h5 id="함수-1">//함수</h5>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mounted</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">getList</span><span class="p">();</span>
+  <span class="p">},</span>
+  <span class="nx">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">getList</span><span class="p">:</span> <span class="k">async</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="c1">//items 배열 안에 list라는 배열을 넣어 2중for문 완성</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">털길이 옵션</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isOpen</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">list</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3mm</span><span class="dl">'</span><span class="p">,</span>
+              <span class="na">onOff</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">price</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5,000</span><span class="dl">'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5mm</span><span class="dl">'</span><span class="p">,</span>
+              <span class="na">onOff</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">price</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5,000</span><span class="dl">'</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">얼굴스타일 옵션</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isOpen</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">list</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">전체컷</span><span class="dl">'</span><span class="p">,</span>
+              <span class="na">onOff</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">price</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5,000</span><span class="dl">'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">알머리</span><span class="dl">'</span><span class="p">,</span>
+              <span class="na">onOff</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">price</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5,000</span><span class="dl">'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">크라운</span><span class="dl">'</span><span class="p">,</span>
+              <span class="na">onOff</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">price</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5,000</span><span class="dl">'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="na">id</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+              <span class="na">txt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">무스타슈</span><span class="dl">'</span><span class="p">,</span>
+              <span class="na">onOff</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">price</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5,000</span><span class="dl">'</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="c1">//push로 새로운 아이템을 넣으려면</span>
+    <span class="nx">addItemNew</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">){</span>
+      <span class="nx">item</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+        <span class="p">{</span>
+          <span class="na">txt</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+          <span class="na">onOff</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="na">price</span><span class="p">:</span> <span class="dl">''</span>      
+        <span class="p">}</span>
+      <span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>추가 및 삭제 되어야 하는 데이터가 배열안의 배열 일 경우, 위의 방법처럼 item을 불러와 넣는 것 보다는</li>
+</ul>
+
+<h5 id="레이아웃-2">//레이아웃</h5>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;el-col</span> <span class="na">:span=</span><span class="s">"8"</span> <span class="na">class=</span><span class="s">"weight-category"</span> <span class="na">v-for=</span><span class="s">"(w_item, index) in weight_obj"</span> <span class="na">:key=</span><span class="s">"w_item.breed_id"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"category-title"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"weight-list"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"(item, index) in w_item.list"</span> <span class="na">:key=</span><span class="s">"item.id"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;el-input</span> <span class="na">size=</span><span class="s">"mini"</span> <span class="na">v-model=</span><span class="s">"item.val"</span> <span class="na">class=</span><span class="s">"weight-input"</span><span class="nt">&gt;&lt;/el-input&gt;</span>
+        <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"mini"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"removeWeightList(w_item.list, index)"</span>  <span class="na">icon=</span><span class="s">"el-icon-delete"</span> <span class="na">class=</span><span class="s">"delete-btn"</span><span class="nt">&gt;&lt;/el-button&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-wrap"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;el-button</span> <span class="na">size=</span><span class="s">"mini"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"addWeightList(w_item.list)"</span><span class="nt">&gt;</span>추가<span class="nt">&lt;/el-button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/el-col&gt;</span>
+</code></pre></div></div>
+
+<p>이러한 구조에서 @click=”removeWeightList(w_item.list)”로 값을 던지고, (괄호 안에 있는 것을 던져준다) <br />
+하단 메소드에서</p>
+
+<h5 id="함수-2">//함수</h5>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">addWeightList</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="o">++</span><span class="k">this</span><span class="p">.</span><span class="nx">weight_dummy_id</span><span class="p">,</span>
+      <span class="na">val</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+      <span class="na">standard</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="na">is_add</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">val_option</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="na">label</span><span class="p">:</span> <span class="dl">'</span><span class="s1">미만</span><span class="dl">'</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="na">label</span><span class="p">:</span> <span class="dl">'</span><span class="s1">이상</span><span class="dl">'</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+<span class="p">},</span>
+<span class="nx">removeWeightList</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">array</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>위에서 w_item.list라는 배열을 던졌으니까 array로 받아서 넣어준다. <br />
+addWeightList 함수에서 push로 배열을 추가하고, <br />
+removeWeightList 함수처럼 splice로 삭제도 가능하다. <br />
+<br />
+splice의 경우에는 몇 번째 배열인 지 알아야 하기 때문에 index도 같이 받아와 넣어줬다.</p>
 :ET
