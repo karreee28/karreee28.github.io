@@ -7,7 +7,8 @@ tags: [study, vuejs, javascript]
 ---
 기본 개념 
 
-`axios` :
+`axios` : Promise 기반의 HTTP 통신 라이브러리
+`Promise` : 비동기연산이 종료된 이후 결과값과 실패사유를 처리하기 위한 처리기 연결
 `await` :
 `mounted` :
 `created` :
