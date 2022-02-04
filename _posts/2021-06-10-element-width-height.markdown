@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "엘리먼트 width(or height)값 조절"
-date:   2021-06-07 00:00:00 +0900
+date:   2021-06-10 00:00:00 +0900
 categories: study
 tags: [study, vuejs]
 ---
